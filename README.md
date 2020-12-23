@@ -1,1 +1,2 @@
-# sorting-algos
+# S
+orting-algos
