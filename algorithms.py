@@ -1,4 +1,5 @@
 import random
+import heapq as h
 
 class Algorithms():
 	
@@ -102,9 +103,8 @@ def merge(arr):
 		right = util(right)
 
 		ret = []
-
-		i = 0
-		j = 0
+		i = j = 0
+		
 		while len(left[i:]) > 0 and len(right[j:]) > 0:
 			if left[i] > right[j]:
 				ret.append(right[j])
@@ -127,37 +127,12 @@ def merge(arr):
 
 
 def heap(arr):
-
-	def heapify(arr, idx=0):
-		i = idx
-		while True:
-			l = i *2 +1
-			r = i *2 +2
-			mx = i
-			if l < len(arr) and arr[i]<  arr[l]:
-				mx = l
-			if r < len(arr) and arr[mx] < arr[r]:
-				mx = r
-			if mx == i:
-				break
-			else:
-				arr[i], arr[mx] = arr[mx], arr[i]
-				i = mx
-		return arr
-
-
-	arr = heapify(arr)
 	ret = []
-	while arr:
-		temp = arr[0]
-		arr[0] = arr[len(arr)-1]
-		del arr[len(arr)-1]
-		arr = heapify(arr)
-		ret.append(temp)
+	h.heapify(arr)
+	for _ in range(len(arr)):
+		ret.append(h.heappop(arr))
 
-	return ret[::-1] 
-
-
+	return ret
 
 
 def radix(arr):
@@ -173,6 +148,19 @@ def radix(arr):
 			arr.extend(t)
 	return arr
 
+def counting(arr):
+	mx = max(arr)	
+	temp = [0 for _ in range(mx+1)]
+	ret = []
+
+	for x in arr:
+		temp[x] +=1
+
+	for i in range(len(temp)):
+		if temp[i] != 0:
+			ret += [i for _ in range(temp[i])]
+
+	return ret
 
  
 
@@ -186,8 +174,11 @@ def radix(arr):
 	
 
 
-arr = [random.randint(0,100000000) for x in range(1_000_000)]
-#print(arr)
-print(radix(arr))
+arr = [random.randint(0,2000) for x in range(1000)]
+arr1 = [random.randint(0,100000000) for x in range(10000)]
+data = [9,8,11,7,6,5,10,4,3,2,12,1]
+
+# print(arr)
+print(counting(arr))
 
 
