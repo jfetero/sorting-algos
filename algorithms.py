@@ -112,14 +112,10 @@ def merge(arr):
 			else:
 				ret.append(left[i])
 				i+=1
-
-		while len(left[i:]) > 0:
-			ret.append(left[i])
-			i +=1 
-
-		while len(right[j:]) > 0:
-			ret.append(right[j])
-			j +=1
+		if len(left) >0:
+			ret.extend(left[i:])
+		if len(right) > 0:
+			ret.extend(right[j:])
 
 		return ret
 
@@ -174,11 +170,11 @@ def counting(arr):
 	
 
 
-arr = [random.randint(0,2000) for x in range(1000)]
-arr1 = [random.randint(0,100000000) for x in range(10000)]
-data = [9,8,11,7,6,5,10,4,3,2,12,1]
+#arr = [random.randint(0,10_00) for x in range(10_000_000)]
+arr1 = [random.randint(0,10000) for x in range(10_000)]
+# data = [9,8,11,7,6,5,10,4,3,2,12,1]
 
 # print(arr)
-print(counting(arr))
+print(radix(arr1))
 
 
