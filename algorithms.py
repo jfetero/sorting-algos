@@ -246,7 +246,7 @@ def radix(arr, drawList = None ,speed =None):
 	drawList(arr,['SeaGreen3' for _ in range(n)])
 	return arr
 
-#================================ Counting Sort ==========================
+#================================ Shell Sort ==========================
 def shell(arr,drawList,speed):
     gap = len(arr)//2
     n = len(arr)
