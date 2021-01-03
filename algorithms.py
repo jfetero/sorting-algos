@@ -220,7 +220,7 @@ def heap(arr, drawList, speed):
 
 	return ret
 
-#================================= Heap Sort ===========================
+#================================= Radix Sort ===========================
 
 def radix(arr, drawList = None ,speed =None):
 	num = len(str(max(arr)))
