@@ -1,8 +1,7 @@
 from tkinter import *
 from tkinter import ttk
-import numpy as np
 import algorithms
-from random import shuffle as shuff
+from random import sample as samp
 import time
 
 
@@ -14,10 +13,10 @@ wind.config(bg = 'gainsboro')
 
 #========= Variables ==============
 selected_algo = StringVar()
-algos = ['Bubble Sort', 'Insertion Sort', 'Binary Insertion Sort', 'Quick Sort', 'Merge Sort', 'Heap Sort', 'Radix Sort', 'Counting Sort']
+algos = ['Bubble Sort', 'Insertion Sort', 'Binary Insertion Sort', 'Quick Sort', 'Merge Sort', 'Heap Sort', 'Radix Sort', 'Shell Sort']
 arr = []
 
-#========= Functions ===========
+#========= Functions ==============
 def generate():
 	# print(f'Selected Algorthm: {selected_algo.get()}')
 	global arr
@@ -26,8 +25,7 @@ def generate():
 	except:
 		size = 20
 
-	arr = list(np.linspace(1,size, size))
-	shuff(arr)
+	arr = samp(range(1,size+1), size)
 	drawList(arr, ['sky blue' for _ in range(int(len(arr)))])
 	
 
@@ -50,7 +48,7 @@ def drawList(arr, colors):
 		y1 = height
 
 		canv.create_rectangle(x0,y0,x1,y1, fill = colors[i])
-		#canv.create_text((x0+x1)//2 -2, y0, anchor = SW, text = str(arr[i]))
+		# canv.create_text((x0+x1)//2 -2, y0, anchor = SW, text = str(arr[i]))
 
 	wind.update()
 
@@ -72,7 +70,7 @@ def start():
 		algorithms.quick(arr, drawList, s)
 
 	if selected_algo.get() == algos[4]:
-		algorithms.merge_sort(arr, drawList, s)
+		algorithms.merge_sort(arr, 0, len(arr)-1, drawList, s)
 
 	if selected_algo.get() == algos[5]:
 		algorithms.heap(arr, drawList, s)
@@ -81,7 +79,7 @@ def start():
 		algorithms.radix(arr, drawList, s)
 
 	if selected_algo.get() == algos[7]:
-		algorithms.counting(arr, drawList, s)
+		algorithms.shell(arr, drawList, s)
 
 
 
@@ -103,8 +101,9 @@ size_label.grid(row=1, column=0, padx = 5, pady = 5, sticky= W)
 size_input = Entry(frame)
 size_input.grid(row=1, column=1, padx = 5, pady = 5, sticky= W)
 
-speed = Scale(frame, from_=0.01, to= .2, length = 200, digits = 2, resolution = .001, orient = HORIZONTAL, label = 'Speed (s): ')
+speed = Scale(frame, from_=0.01, to= .5, length = 200, digits = 2, resolution = .001, orient = HORIZONTAL, label = 'Speed (s): ')
 speed.grid(row = 0, column = 3, padx = 5, pady = 5)
+speed.set(.06)
 
 # buttons
 gen_list_button = Button(frame, text = 'Generate List', command = generate, bg = 'blue')
