@@ -135,63 +135,63 @@ def quick(arr, drawList, speed):
 
 #============================== Merge Sort ==============================
 def merge_sort(arr,left,right, drawList=None, speed=None): 
-if left < right: 
-    mid = (left+(right-1))//2
+    if left < right: 
+        mid = (left+(right-1))//2
 
-    merge_sort(arr, left, mid, drawList, speed) 
-    merge_sort(arr, mid+1, right, drawList, speed) 
-    merge(arr, left, mid, right, drawList, speed) 
+        merge_sort(arr, left, mid, drawList, speed) 
+        merge_sort(arr, mid+1, right, drawList, speed) 
+        merge(arr, left, mid, right, drawList, speed) 
 
-drawList(arr,['SeaGreen3' for _ in range(len(arr))])
+    drawList(arr,['SeaGreen3' for _ in range(len(arr))])
 
-return arr
+    return arr
 
 def merge(arr, left, mid, right, drawList=None, speed=None): 
-s1 = mid - left + 1
-s2 = right- mid
-# drawList(arr,['green' if x <= right else 'sky blue' for x in range(len(arr))])
-# time.sleep(speed)
-l_arr = [0] * (s1) 
-r_arr = [0] * (s2) 
-    
-for i in range(s1): 
-    l_arr[i] = arr[left + i] 
+    s1 = mid - left + 1
+    s2 = right- mid
+    # drawList(arr,['green' if x <= right else 'sky blue' for x in range(len(arr))])
+    # time.sleep(speed)
+    l_arr = [0] * (s1) 
+    r_arr = [0] * (s2) 
+        
+    for i in range(s1): 
+        l_arr[i] = arr[left + i] 
 
-for j in range(s2): 
-    r_arr[j] = arr[mid + 1 + j] 
+    for j in range(s2): 
+        r_arr[j] = arr[mid + 1 + j] 
 
-l = r = 0          
-idx = left
+    l = r = 0          
+    idx = left
 
-drawList(arr,['red' if x== idx else'green' if x >= left and x <= right else 'sky blue' for x in range(len(arr))])
-time.sleep(speed)
+    drawList(arr,['red' if x== idx else'green' if x >= left and x <= right else 'sky blue' for x in range(len(arr))])
+    time.sleep(speed)
 
-while l < s1 and r < s2: 
-    if l_arr[l] <= r_arr[r]:
-            arr[idx] = l_arr[l]
-            l += 1
-    else: 
+    while l < s1 and r < s2: 
+        if l_arr[l] <= r_arr[r]:
+                arr[idx] = l_arr[l]
+                l += 1
+        else: 
+            arr[idx] = r_arr[r] 
+            r += 1
+        idx += 1
+
+    drawList(arr,['red' if x== idx else'green' if x >= left and x <= right else 'sky blue' for x in range(len(arr))])
+    time.sleep(speed)
+
+
+    while l < s1: 
+        arr[idx] = l_arr[l] 
+        l += 1
+        idx += 1
+    drawList(arr,['red' if x== idx else'green' if x >= left and x<=right else 'sky blue' for x in range(len(arr))])
+    time.sleep(speed)
+
+    while r < s2: 
         arr[idx] = r_arr[r] 
         r += 1
-    idx += 1
-
-drawList(arr,['red' if x== idx else'green' if x >= left and x <= right else 'sky blue' for x in range(len(arr))])
-time.sleep(speed)
-
-
-while l < s1: 
-    arr[idx] = l_arr[l] 
-    l += 1
-    idx += 1
-drawList(arr,['red' if x== idx else'green' if x >= left and x<=right else 'sky blue' for x in range(len(arr))])
-time.sleep(speed)
-
-while r < s2: 
-    arr[idx] = r_arr[r] 
-    r += 1
-    idx += 1
-drawList(arr,['red' if x== idx else'green' if x >= left and x<= right else 'sky blue' for x in range(len(arr))])
-time.sleep(speed)
+        idx += 1
+    drawList(arr,['red' if x== idx else'green' if x >= left and x<= right else 'sky blue' for x in range(len(arr))])
+    time.sleep(speed)
 
 
 
@@ -248,25 +248,25 @@ def radix(arr, drawList = None ,speed =None):
 
 #================================ Shell Sort ==========================
 def shell(arr,drawList,speed):
-gap = len(arr)//2
-n = len(arr)
-while gap > 0:
-    drawList(arr,['blue' if x == gap else 'sky blue' for x in range(n)])
-    time.sleep(speed)
-    for i in range(gap, len(arr)):
-            val = arr[i]
-            idx = i
-            drawList(arr,['red' if x == idx-gap else'gold' if x == i else 'blue' if x == gap else 'green' if x <= idx  else 'sky blue' for x in range(n)])
-            time.sleep(speed)
-            while idx >= gap and val <arr[idx - gap]:
-                    drawList(arr,['red' if x == idx-gap else'gold' if x == i else 'blue' if x == gap else 'green' if x <= idx else 'sky blue' for x in range(n)])
-                    time.sleep(speed)
-                    arr[idx] = arr[idx-gap]
-                    idx = idx-gap
-            arr[idx] = val
-    gap //=2
-drawList(arr,['SeaGreen3' for _ in range(n)])
-return arr
+    gap = len(arr)//2
+    n = len(arr)
+    while gap > 0:
+        drawList(arr,['blue' if x == gap else 'sky blue' for x in range(n)])
+        time.sleep(speed)
+        for i in range(gap, len(arr)):
+                val = arr[i]
+                idx = i
+                drawList(arr,['red' if x == idx-gap else'gold' if x == i else 'blue' if x == gap else 'green' if x <= idx  else 'sky blue' for x in range(n)])
+                time.sleep(speed)
+                while idx >= gap and val <arr[idx - gap]:
+                        drawList(arr,['red' if x == idx-gap else'gold' if x == i else 'blue' if x == gap else 'green' if x <= idx else 'sky blue' for x in range(n)])
+                        time.sleep(speed)
+                        arr[idx] = arr[idx-gap]
+                        idx = idx-gap
+                arr[idx] = val
+        gap //=2
+    drawList(arr,['SeaGreen3' for _ in range(n)])
+    return arr
 
 
 
